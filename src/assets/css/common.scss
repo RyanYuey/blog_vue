@@ -1,0 +1,48 @@
+// 常用类
+
+.ellipsis{//单行文本溢出
+  overflow: hidden;
+  text-overflow:ellipsis;//文本溢出显示省略号
+  white-space:nowrap;//文本不会换行（单行文本溢出）
+}
+
+.mult_line_ellipsis{//多行文本溢出
+  overflow: hidden;
+  text-overflow:ellipsis;//文本溢出显示省略号
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+// css动画切换按钮 toggle-icon 原始状态 pushed 响应状态
+
+/*toggle-icon*/
+.toggle-icon {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+  margin-bottom: 6px;
+  transition: 0.4s;
+}
+
+.bar3{
+  margin-bottom: 0;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-6px, 6px) ;
+  transform: rotate(-45deg) translate(-6px, 6px) ;
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-7px, -7px) ;
+  transform: rotate(45deg) translate(-7px, -7px) ;
+}
