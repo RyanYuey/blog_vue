@@ -284,7 +284,7 @@ export default {
     margin-left: 20px;
   }
   .spin-wrap {
-    height: 200px;
+    height: 400px;
     position: relative;
     background: #fff;
   }
