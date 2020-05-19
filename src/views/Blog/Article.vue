@@ -159,12 +159,14 @@ export default {
       clearTimeout(timer);
     });
     window.addEventListener("scroll", this.appScroll);
-    window.onresize = () => {
-      this.isFixed = false;
-      this.screenWidth = document.body.clientWidth;
-      this.isFixed = this.screenWidth < 992 ? false : true;
-    };
-    new WOW().init();
+    // window.onresize = () => {
+    //   this.isFixed = false;
+    //   this.screenWidth = document.body.clientWidth;
+    //   this.isFixed = this.screenWidth < 992 ? false : true;
+    // };
+    new WOW({
+      live: false
+    }).init();
   },
   watch: {
     dataList () {
@@ -172,7 +174,7 @@ export default {
         // 在dom渲染完后,再执行动画
         new WOW({
           boxClass: "asyncWow",
-          live: true
+          live: false
         }).init();
       });
     }

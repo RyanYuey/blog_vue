@@ -197,7 +197,9 @@ export default {
     };
   },
   mounted () {
-    new WOW().init();
+    new WOW({
+      live: false
+    }).init();
   },
   methods: {
     // 滚动到指定锚点
