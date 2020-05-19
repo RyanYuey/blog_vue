@@ -197,7 +197,11 @@ export default {
     };
   },
   mounted () {
-    new WOW().init();
+    let wow = new WOW({
+      live:false
+    });
+    console.log(wow)
+    wow.init();
   },
   methods: {
     // 滚动到指定锚点
