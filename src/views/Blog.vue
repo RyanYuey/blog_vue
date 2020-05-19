@@ -31,7 +31,7 @@
                         to="/blog/diary">
               日记
               </MenuItem>
-              <MenuItem name="4">
+              <MenuItem name="4" to="/blog/about">
               关于
               </MenuItem>
             </div>
