@@ -2,7 +2,7 @@
   <div class="container">
     <div class="options">
       <Button type="primary"
-              @click="">添加日记</Button>
+              to="/admin/newDiary">新建日记</Button>
     </div>
     <div class="list-wrap">
       <Table :loading="loading"
