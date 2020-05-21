@@ -8,7 +8,7 @@
 export default {
   name: "app",
   components: {},
-  mounted() {
+  mounted () {
     // 每次切换路由回到页面最顶端
     this.$router.afterEach(() => {
       window.scrollTo(0, 0);

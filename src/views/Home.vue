@@ -404,7 +404,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("../assets/image/like01.png");
+  background: url("../assets/image/night.jpg");
   background-attachment: fixed;
   .my-button {
     width: 150px;

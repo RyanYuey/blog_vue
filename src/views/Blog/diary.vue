@@ -1,5 +1,11 @@
 <template>
   <div class="diary">
+    <div class="spin-wrap"
+           v-if="spinShow">
+        <Spin size="large"
+              fix
+              v-if="spinShow"></Spin>
+    </div>
     <div class="year asyncWow bounceInUp"
          v-for="name in dataArr"
          :key="name">
@@ -41,7 +47,8 @@ export default {
       hideObj: {}, //控制数据展开收起
       dataObj: {},
       dataArr: [], //保存对象的key，这样可以排序
-      host: _Config.baseURL
+      host: _Config.baseURL,
+      spinShow: true
     };
   },
   created () {
@@ -49,7 +56,7 @@ export default {
   },
   methods: {
     getData () {
-      this.$Spin.show();
+      this.spinShow = true;
       Services.getDiaryList().then(res => {
         let dataList = res.data;
         let data = {}; //保存所有年份，不能重复
@@ -62,7 +69,7 @@ export default {
           data[year] = data[year] || [];
           data[year].push(item);
           this.hideObj[year] = false; //初始化隐藏对象
-          this.$Spin.hide();
+          this.spinShow = false;
           new WOW().init();
         });
         this.dataObj = data;
@@ -155,6 +162,11 @@ export default {
       }
     }
   }
+}
+
+.spin-wrap{
+  position: relative;
+  height: 400px;
 }
 
 .fade-enter-active,
