@@ -92,6 +92,11 @@ const routes = [
         path: "/admin/diary",
         name: "DiaryManage",
         component: () => import("../views/BlogManage/DiaryManage.vue")
+      },
+      {
+        path: "/admin/newDiary",
+        name: "NewDiary",
+        component: () => import("../views/BlogManage/NewDiary.vue")
       }
     ]
   }
