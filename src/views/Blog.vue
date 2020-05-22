@@ -28,10 +28,15 @@
               博客
               </MenuItem>
               <MenuItem name="3"
+                        to="/blog/message">
+              留言
+              </MenuItem>
+              <MenuItem name="4"
                         to="/blog/diary">
               日记
               </MenuItem>
-              <MenuItem name="4" to="/blog/about">
+              <MenuItem name="5"
+                        to="/blog/about">
               关于
               </MenuItem>
             </div>
@@ -81,10 +86,15 @@
             博客
             </MenuItem>
             <MenuItem name="3"
+                      to="/blog/message">
+            留言
+            </MenuItem>
+            <MenuItem name="4"
                       to="/blog/diary">
             日记
             </MenuItem>
-            <MenuItem name="4">
+            <MenuItem name="5"
+                      to="/blog/about">
             关于
             </MenuItem>
           </Menu>

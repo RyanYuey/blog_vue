@@ -36,5 +36,13 @@ export default {
   // 删除标签
   deleteLabel (data) {
     return request.post("/api/admin/del_label", data);
+  },
+  // 新建日记
+  newDiary (data) {
+    return request.post("/api/admin/new_diary", data);
+  },
+  // 删除日记
+  deleteDiary (data) {
+    return request.post("/api/admin/del_diary", data);
   }
 };

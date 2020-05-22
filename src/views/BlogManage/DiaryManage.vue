@@ -78,6 +78,32 @@ export default {
     },
     toDetail (data) {
       console.log(data);
+    },
+    remove (data) {
+      this.$Modal.confirm({
+        title: "删除提示",
+        content: `确定要删除 ${data.content}?`,
+        onOk: async () => {
+          const res = await adminServices.deleteDiary({
+            diary_id: data.diary_id
+          });
+          if (res.errno === 0) {
+            this.$Notice.success({
+              title: "删除提示",
+              desc: "删除成功"
+            });
+            this.getData();
+          } else {
+            this.$Notice.error({
+              title: "删除提示",
+              desc: res.message || "删除失败"
+            });
+          }
+        },
+        onCancel: () => {
+          this.$Message.info("您已取消");
+        }
+      });
     }
   }
 };
