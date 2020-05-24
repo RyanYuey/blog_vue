@@ -73,5 +73,17 @@ export default {
   // 删除评论
   delComment (data) {
     return request.post("/api/article/del_comment", data);
+  },
+  // 获取留言
+  getMessage () {
+    return request.get("/api/message_list");
+  },
+  // 添加留言
+  addMessage (data) {
+    return request.post("/api/new_message", data);
+  },
+  // 删除留言
+  delMessage (data) {
+    return request.post("/api/del_message", data);
   }
 };

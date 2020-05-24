@@ -16,26 +16,26 @@
           <Menu mode="horizontal"
                 theme="light"
                 @on-select="onMenuSelect()"
-                active-name="2"
+                :active-name="$route.name"
                 class="menu">
             <div class="layout-nav">
-              <MenuItem name="1"
+              <MenuItem name="Home"
                         to="/home">
               首页
               </MenuItem>
-              <MenuItem name="2"
+              <MenuItem name="Article"
                         to="/blog/article">
               博客
               </MenuItem>
-              <MenuItem name="3"
-                        to="/blog/message">
-              留言
-              </MenuItem>
-              <MenuItem name="4"
+              <MenuItem name="Diary"
                         to="/blog/diary">
               日记
               </MenuItem>
-              <MenuItem name="5"
+              <MenuItem name="Message"
+                        to="/blog/message">
+              留言
+              </MenuItem>
+              <MenuItem name="About"
                         to="/blog/about">
               关于
               </MenuItem>
@@ -77,23 +77,23 @@
                 mode="vertical"
                 width="100%"
                 accordion>
-            <MenuItem name="1"
+            <MenuItem name="Home"
                       to="/home">
             首页
             </MenuItem>
-            <MenuItem name="2"
+            <MenuItem name="Article"
                       to="/blog/article">
             博客
             </MenuItem>
-            <MenuItem name="3"
-                      to="/blog/message">
-            留言
-            </MenuItem>
-            <MenuItem name="4"
+            <MenuItem name="Diary"
                       to="/blog/diary">
             日记
             </MenuItem>
-            <MenuItem name="5"
+            <MenuItem name="Message"
+                      to="/blog/message">
+            留言
+            </MenuItem>
+            <MenuItem name="About"
                       to="/blog/about">
             关于
             </MenuItem>

@@ -1,5 +1,4 @@
 const _Config = require("./src/config/index");
-
 module.exports = {
   lintOnSave: false,
   devServer: {

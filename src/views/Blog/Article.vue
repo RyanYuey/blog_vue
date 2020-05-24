@@ -11,8 +11,7 @@
       <ul class="blog-list"
           id="blog_list">
         <li class="blog-item asyncWow fadeInUp"
-            :data-wow-duration="0.5 + index / 5 + 's'"
-            v-for="(item, index) in dataList"
+            v-for="item in dataList"
             :key="item.article_id">
           <img class="item-img"
                :src="host + item.thumbnail"

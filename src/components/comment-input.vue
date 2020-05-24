@@ -84,7 +84,7 @@ export default {
   transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
   overflow-y: hidden;
-  height: 5em;
+  height: 8em;
   &:focus {
     border: 1px solid #2d8cf0;
     box-shadow: 0 0 0 1px rgba(45, 140, 240, 0.3);

@@ -11,7 +11,10 @@
           </div>
           <div class="comment__main">
             <div class="comment__header">
-              <span class="nickname">{{ item.from_nickname }}</span>
+              <span class="nickname">{{ item.from_nickname }}
+                <span class="admin"
+                      v-if="item.from_uid == 1">站长</span>
+              </span>
               <span class="date">{{ item.create_time }}</span>
             </div>
             <div class="comment__content">{{ item.content }}</div>
@@ -40,7 +43,9 @@
                 </div>
                 <div class="response__main">
                   <div class="response__header">
-                    <span class="nickname">{{ it.from_nickname }}</span>
+                    <span class="nickname">{{ it.from_nickname }}
+                      <span class="admin"
+                            v-if="it.from_uid == 1">站长</span></span>
                     <span class="date">{{ it.create_time }}</span>
                   </div>
                   <div class="response__content">
@@ -161,6 +166,11 @@ export default {
 
 <style lang="scss" scoped>
 // 评论
+.admin {
+  color: #fff;
+  // border: 1px solid red;
+  background: #00cc00;
+}
 .comment {
   width: 100%;
   &__list {

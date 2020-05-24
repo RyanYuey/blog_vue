@@ -61,7 +61,7 @@
 
     <!-- 热门博客 -->
     <section class="hot-blog">
-      <div class="header wow fadeInUp">
+      <div class="header asyncWow fadeInUp">
         <h2>热门博客</h2>
         <hr color="#ff9900" />
         <p class="thought">闲言碎语，不吝赐教</p>
@@ -72,48 +72,22 @@
         <Col class-name="col"
              :xxl="6"
              :md="8"
-             :xs="24">
-        <div class="c-item wow fadeInUp"
-             data-wow-duration="1s">
+             :xs="24"
+             v-for="(item, index) in hotBlogList"
+             :key="item.article_id">
+        <div class="c-item asyncWow fadeInUp"
+             :data-wow-duration="'1.' + index * 2 + 's'">
           <div class="img-wrap">
-            <img :src="img"
+            <img :src="host + item.thumbnail"
                  alt="博客配图" />
           </div>
-          <h3 class="title">MUI上拉加载和下拉刷新出现双滚动条BUG解决办法</h3>
-          <p class="date">2020-03-20</p>
-          <a class="more">阅读详情</a>
-        </div>
-        </Col>
-
-        <Col class-name="col"
-             :xxl="6"
-             :md="8"
-             :xs="24">
-        <div class="c-item wow fadeInUp"
-             data-wow-duration="1.2s">
-          <div class="img-wrap">
-            <img :src="img"
-                 alt="博客配图" />
-          </div>
-          <h3 class="title">MUI上拉加载和下拉刷新出现双滚动条BUG解决办法</h3>
-          <p class="date">2020-03-20</p>
-          <a class="more">阅读详情</a>
-        </div>
-        </Col>
-
-        <Col class-name="col"
-             :xxl="6"
-             :md="8"
-             :xs="24">
-        <div class="c-item wow fadeInUp"
-             data-wow-duration="1.5s">
-          <div class="img-wrap">
-            <img :src="img"
-                 alt="博客配图" />
-          </div>
-          <h3 class="title">MUI上拉加载和下拉刷新出现双滚动条BUG解决办法</h3>
-          <p class="date">2020-03-20</p>
-          <a class="more">阅读详情</a>
+          <h3 class="title"
+              @click="toDetail(item.article_id)">
+            {{ item.article_title }}
+          </h3>
+          <p class="date">{{ $formatDate(item.create_time) }}</p>
+          <a class="more"
+             @click="toDetail(item.article_id)">阅读详情</a>
         </div>
         </Col>
       </Row>
@@ -121,9 +95,16 @@
 
     <!-- 关于我 -->
     <section class="about">
-      <div class="my-button wow fadeInUp"
-           data-wow-delay="0.5s">
+      <div class="my-button wow fadeInLeft"
+           data-wow-delay="0.5s"
+           @click="jumpTo('About')">
         <h3>关于我</h3>
+        <div class="inner-box"></div>
+      </div>
+      <div class="my-button wow fadeInRight"
+           data-wow-delay="0.5s"
+           @click="jumpTo('Message')">
+        <h3>给我留言</h3>
         <div class="inner-box"></div>
       </div>
     </section>
@@ -143,11 +124,11 @@
           <h3>
             <Icon type="ios-link" />相关链接</h3>
           <div class="router-wrap">
-            <router-link to="Blog">
+            <router-link to="/blog/article">
               <Icon type="md-book" />博文</router-link>
-            <router-link to="Blog">
+            <router-link to="/blog/message">
               <Icon type="md-clipboard" />留言</router-link>
-            <router-link to="/About">
+            <router-link to="/blog/diary">
               <Icon type="md-paper" />日记</router-link>
           </div>
         </div>
@@ -184,19 +165,24 @@
 
 <script>
 // @ is an alias to /src
+const _Config = require("@/config/index.js");
 import { WOW } from "wowjs";
+import Services from "@/api/common.js";
 export default {
   name: "Home",
   components: {},
   data () {
     return {
+      host: _Config.baseURL, //域名
       screenHeight: window.innerHeight,
       showNav: false,
+      hotBlogList: [],
       img:
         "https://tse1-mm.cn.bing.net/th/id/OIP.xW8rgopGoMQZ-7gjTqQqFgHaFO?w=297&h=209&c=7&o=5&dpr=1.25&pid=1.7"
     };
   },
   mounted () {
+    this.getHotArticles();
     new WOW({
       live: false
     }).init();
@@ -213,6 +199,33 @@ export default {
     jumpTo (componentName) {
       this.$router.push({
         name: componentName
+      });
+    },
+    // 获取热门文章列表
+    async getHotArticles () {
+      const res = await Services.getHotArticles();
+      if (res.errno === 0) {
+        this.hotBlogList = res.data.slice(0, 3);
+      } else {
+        this.$Message.error("获取热门文章错误");
+      }
+    },
+    // 博客详情
+    toDetail (id) {
+      this.$router.push({
+        name: "ArticleDetail",
+        params: { id }
+      });
+    }
+  },
+  watch: {
+    hotBlogList () {
+      this.$nextTick(() => {
+        // 在dom渲染完后,再执行动画
+        new WOW({
+          boxClass: "asyncWow",
+          live: false
+        }).init();
       });
     }
   }
@@ -414,8 +427,10 @@ export default {
     line-height: 40px;
     text-align: center;
     cursor: pointer;
-
     position: relative;
+    &:first-child {
+      margin-right: 50px;
+    }
     h3 {
       position: absolute;
       left: 50%;
