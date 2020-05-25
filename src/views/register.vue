@@ -2,14 +2,22 @@
   <div class="container">
     <div class="login">
       <div class="inner">
-        <h3 class="login-title">博客登录</h3>
+        <h3 class="login-title">博客注册</h3>
         <Form ref="form"
               :model="form"
               :rules="rule">
+            <FormItem prop="user_nickname">
+            <Input type="text"
+                   v-model="form.user_nickname"
+                   placeholder="请输入昵称">
+            <Icon type="ios-person-outline"
+                  slot="prepend"></Icon>
+            </Input>
+          </FormItem>
           <FormItem prop="user_name">
             <Input type="text"
                    v-model="form.user_name"
-                   placeholder="请输入用户名/邮箱">
+                   placeholder="请输入邮箱">
             <Icon type="ios-person-outline"
                   slot="prepend"></Icon>
             </Input>
@@ -22,14 +30,19 @@
                   slot="prepend"></Icon>
             </Input>
           </FormItem>
+          <FormItem >
+            <div class="avatar-list">
+                <div :class="['img',{'img-selected':avatarIndex == index}]" v-for="(item,index) in avatarList" :key="item.id" @click="avatarIndex = index"><img :src="item.href" alt=""></div>
+            </div>
+          </FormItem>
           <FormItem>
             <Button type="primary"
                     long
-                    @click="handleSubmit('form')">登录</Button>
+                    @click="handleSubmit('form')">注册并登录</Button>
           </FormItem>
         </Form>
-        <div style="float:right;">
-          <Button type="text" size="small" icon="md-arrow-round-forward" to="/register">没有账号，去注册</Button>
+        <div>
+          <Button type="text" size="small" icon="md-arrow-round-back" to="/login">已有账号，去登陆</Button>
         </div>
       </div>
     </div>
@@ -42,16 +55,27 @@ export default {
   data () {
     return {
       form: {
-        user_name: "",
-        user_password: ""
+        user_name: "", //不要用户名，直接拿邮箱做用户名
+        user_nickname:'',
+        user_password: "",
+        user_avatar:'',
       },
       rule: {
         user_name: [
-          { required: true, message: "请输入用户名或邮箱", trigger: "blur" },
+          { required: true, message: "请输入邮箱", trigger: "blur" },
+          {
+            type: "email",
+            message: "邮箱格式错误",
+            trigger: "blur"
+          }
+        ],
+        user_nickname:[
+            { required: true, message: "请输入用户昵称", trigger: "blur" },
           {
             type: "string",
             min: 3,
-            message: "用户名最少要3位",
+            max: 9,
+            message: "昵称长度3-9位",
             trigger: "blur"
           }
         ],
@@ -65,7 +89,15 @@ export default {
             trigger: "blur"
           }
         ]
-      }
+      },
+      avatarList:[
+          {href:'https://pic1.zhimg.com/80/v2-1c7bbfbddcc50b3c55f4e3a55ee40873_720w.jpg',id:1},
+          {href:'https://pic1.zhimg.com/80/v2-1c7bbfbddcc50b3c55f4e3a55ee40873_720w.jpg',id:2},
+          {href:'https://pic1.zhimg.com/80/v2-1c7bbfbddcc50b3c55f4e3a55ee40873_720w.jpg',id:3},
+          {href:'https://pic1.zhimg.com/80/v2-1c7bbfbddcc50b3c55f4e3a55ee40873_720w.jpg',id:4},
+          {href:'https://pic1.zhimg.com/80/v2-1c7bbfbddcc50b3c55f4e3a55ee40873_720w.jpg',id:5}
+     ],
+     avatarIndex:0,
     };
   },
   methods: {
@@ -112,7 +144,7 @@ export default {
 
 .login {
   width: 400px;
-  height: 340px;
+  height: 450px;
   padding: 30px 0;
   box-sizing: border-box;
   background: #fff;
@@ -143,5 +175,31 @@ export default {
     font-size: 12px;
     color: red;
   }
+}
+
+.avatar-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // height: 100px;
+    .img{
+        width: 40px;
+        height: 40px;
+        background: blue;
+        overflow: hidden;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .img-selected{
+        border: 1px solid #2d8cf0;
+        box-shadow: 0 0 8px #2d8cf0;
+    }
 }
 </style>
