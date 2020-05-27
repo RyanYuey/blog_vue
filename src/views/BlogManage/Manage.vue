@@ -37,7 +37,8 @@
           <Icon type="ios-text" />
           <span>日记管理</span>
           </MenuItem>
-          <MenuItem name="6">
+          <MenuItem name="6"
+                    to="/admin/user">
           <Icon type="ios-people" />
           <span>会员管理</span>
           </MenuItem>

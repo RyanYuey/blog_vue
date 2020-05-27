@@ -44,5 +44,9 @@ export default {
   // 删除日记
   deleteDiary (data) {
     return request.post("/api/admin/del_diary", data);
+  },
+  // 删除日记
+  deleteUser (data) {
+    return request.post("/api/admin/del_user", data);
   }
 };

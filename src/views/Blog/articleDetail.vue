@@ -26,7 +26,7 @@
                       :subfield="false"
                       :boxShadow="false"
                       defaultOpen="preview"
-                      codeStyle="tomorrow-night-eighties"
+                      codeStyle="atelier-estuary-dark"
                       style="z-index:0;" />
       </div>
       <!-- 延申阅读 -->
@@ -110,7 +110,11 @@ export default {
   },
   mounted () {
     const _data = localStorage.getItem("user_info");
-    this.userInfo = JSON.parse(_data);
+    if (_data) {
+      this.userInfo = JSON.parse(_data);
+    } else {
+      this.userInfo = { user_id: 0 };
+    }
     this.$Spin.show();
     this.getDetail();
     this.getExtendData();
