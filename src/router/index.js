@@ -112,6 +112,11 @@ const routes = [
         path: "/admin/setting",
         name: "Setting",
         component: () => import("../views/BlogManage/setting.vue")
+		},{
+        path: "/admin/user",
+        name: "UserManage",
+        component: () => import("../views/BlogManage/userManage.vue")
+
       }
     ]
   }

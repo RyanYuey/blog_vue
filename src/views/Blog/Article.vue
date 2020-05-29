@@ -269,6 +269,9 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/css/common.scss";
 @import "@/assets/css/variable.scss";
+li {
+  list-style: none;
+}
 .article {
   position: relative;
   width: 1280px;

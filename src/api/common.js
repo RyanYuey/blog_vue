@@ -51,6 +51,18 @@ export default {
   login (data) {
     return request.post("/api/user/login", data);
   },
+  // 注册
+  register (data) {
+    return request.post("/api/user/register", data);
+  },
+  // 退出登录
+  logout () {
+    return request.post("/api/user/logout");
+  },
+  // 获取用户列表
+  getUserList () {
+    return request.get("/api/user/list");
+  },
 
   // 图片上传
   upLoad (formdata) {
@@ -85,5 +97,9 @@ export default {
   // 删除留言
   delMessage (data) {
     return request.post("/api/del_message", data);
+  },
+  // 获取默认头像列表
+  getDefaultAvatar () {
+    return request.get("/api/img_list");
   }
 };

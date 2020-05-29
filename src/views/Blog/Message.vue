@@ -34,12 +34,19 @@ export default {
     return {
       host: _Config.baseURL,
       commentsData: [], //评论数据
-      userInfo: {} //用户信息
+      userInfo: {
+        user_id: 0
+      } //用户信息
     };
   },
   created () {
     const _data = localStorage.getItem("user_info");
-    this.userInfo = JSON.parse(_data);
+    if (_data) {
+      this.userInfo = JSON.parse(_data);
+    } else {
+      this.userInfo = { user_id: 0 };
+    }
+
     this.getCommentList();
   },
   methods: {

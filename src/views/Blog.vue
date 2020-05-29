@@ -123,6 +123,7 @@
 
 <script>
 import Config from "@/config/index.js";
+import Services from "@/api/common.js";
 export default {
   data () {
     return {
@@ -146,8 +147,19 @@ export default {
       console.log(name);
     },
     // 退出
-    logout () {
-      this.$router.push({ name: "Login" });
+    async logout () {
+      const res = await Services.logout();
+      if (res.errno === 0) {
+        this.$Message.success("退出成功");
+
+        // 清除登录状态
+        localStorage.removeItem("user_info");
+        this.$store.commit("handleUserName", "");
+
+        this.$router.push({ name: "Login" });
+      } else {
+        this.$Message.error("退出失败");
+      }
     }
   }
 };
