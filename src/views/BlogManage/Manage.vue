@@ -41,7 +41,7 @@
           <Icon type="ios-people" />
           <span>会员管理</span>
           </MenuItem>
-          <MenuItem name="7">
+          <MenuItem name="7" to="/admin/setting">
           <Icon type="ios-settings"></Icon>
           <span>设置</span>
           </MenuItem>

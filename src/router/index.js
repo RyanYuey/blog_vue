@@ -107,6 +107,11 @@ const routes = [
         path: "/admin/newDiary",
         name: "NewDiary",
         component: () => import("../views/BlogManage/NewDiary.vue")
+      },
+      {
+        path: "/admin/setting",
+        name: "Setting",
+        component: () => import("../views/BlogManage/setting.vue")
       }
     ]
   }
