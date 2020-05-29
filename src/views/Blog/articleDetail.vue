@@ -29,6 +29,18 @@
                       codeStyle="atelier-estuary-dark"
                       style="z-index:0;" />
       </div>
+      <!-- 标签 -->
+      <div class="label"
+           style="margin-top:20px;">
+        <Icon type="ios-pricetags-outline"
+              size="20"
+              color="#999"
+              style="margin-right:10px;" />
+        <Tag v-for="item in tags"
+             :key="item.label_id">{{
+          item.label_name
+        }}</Tag>
+      </div>
       <!-- 延申阅读 -->
       <div class="extend-read">
         <div class="title">延申阅读</div>
@@ -95,7 +107,7 @@ export default {
     return {
       spinShow: true,
       host: _Config.baseURL,
-      article: {}, //文章的所情信息
+      article: {}, //文章的所有信息
       extend_data: {
         before: { id: -1, title: "哇，我找不到了" },
         after: { id: -1, title: "哇，我找不到了" }
@@ -105,7 +117,8 @@ export default {
       likeStatus: false, //点赞状态
       actionable: true, //是否可操作点赞按钮，防止用户一直点击
       commentsData: [], //评论数据
-      userInfo: {} //用户信息
+      userInfo: {}, //用户信息
+      tagList: []
     };
   },
   mounted () {
@@ -119,6 +132,20 @@ export default {
     this.getDetail();
     this.getExtendData();
     this.getCommentList();
+    this.getTags();
+  },
+  computed: {
+    tags () {
+      let label_id = this.article.label_id;
+      if (label_id) {
+        return label_id.split(",").map(id => {
+          return this.tagList.find(item => {
+            return item.label_id == id;
+          });
+        });
+      }
+      return [];
+    }
   },
   watch: {
     // 监听路由参数变化， 由于vue机制，同一组件想要复用(比如通过另一个id获取详情)，不会触发生命周期函数
@@ -127,6 +154,12 @@ export default {
   methods: {
     sendComment () {
       console.log(this.comment);
+    },
+    async getTags () {
+      const res = await Services.getLabelList();
+      if (res.errno === 0) {
+        this.tagList = res.data;
+      }
     },
     // 获取博客详情
     async getDetail () {
