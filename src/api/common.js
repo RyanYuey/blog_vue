@@ -99,7 +99,9 @@ export default {
     return request.post("/api/del_message", data);
   },
   // 获取默认头像列表
-  getDefaultAvatar () {
-    return request.get("/api/img_list");
+  getDefaultAvatar (data) {
+    return request.get("/api/img_list", {
+      params: data
+    });
   }
 };

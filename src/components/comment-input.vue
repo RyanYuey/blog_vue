@@ -5,6 +5,7 @@
     <textarea ref="myText"
               @blur="handleBlur"
               class="my-textarea"
+              :style="{ height: isReply ? '4.5em' : '6em' }"
               v-model="content"
               :placeholder="isReply ? '回复 ' + name : '说点什么吧'"></textarea>
     <div class="btn-wrap">
@@ -68,6 +69,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+textarea {
+  outline: none;
+}
 .comment-input {
   padding: 4px 0;
 }
@@ -84,7 +88,7 @@ export default {
   transition: border 0.2s ease-in-out, background 0.2s ease-in-out,
     box-shadow 0.2s ease-in-out;
   overflow-y: hidden;
-  height: 8em;
+  // height: 8em;
   &:focus {
     border: 1px solid #2d8cf0;
     box-shadow: 0 0 0 1px rgba(45, 140, 240, 0.3);

@@ -109,6 +109,11 @@ const routes = [
         component: () => import("../views/BlogManage/NewDiary.vue")
       },
       {
+        path: "/admin/setting",
+        name: "Setting",
+        component: () => import("../views/BlogManage/setting.vue")
+      },
+      {
         path: "/admin/user",
         name: "UserManage",
         component: () => import("../views/BlogManage/userManage.vue")
@@ -118,6 +123,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes
 });
 

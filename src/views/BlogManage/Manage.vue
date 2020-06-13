@@ -8,41 +8,42 @@
              :collapsed-width="78"
              v-model="isCollapsed"
              style="min-height:100vh;">
-        <Menu active-name="1"
+        <Menu :active-name="$route.name"
               theme="dark"
               width="auto"
               :class="menuitemClasses">
-          <MenuItem name="1"
+          <MenuItem name="AdminHome"
                     to="/admin/home">
           <Icon type="ios-home" />
           <span>管理首页</span>
           </MenuItem>
-          <MenuItem name="2"
+          <MenuItem name="ArticleManage"
                     to="/admin/article">
           <Icon type="ios-book" />
           <span>文章管理</span>
           </MenuItem>
-          <MenuItem name="3"
+          <MenuItem name="SortManage"
                     to="/admin/sort">
           <Icon type="ios-cube" />
           <span>分类管理</span>
           </MenuItem>
-          <MenuItem name="4"
+          <MenuItem name="LabelManage"
                     to="/admin/label">
           <Icon type="ios-pricetag" />
           <span>标签管理</span>
           </MenuItem>
-          <MenuItem name="5"
+          <MenuItem name="DiaryManage"
                     to="/admin/diary">
           <Icon type="ios-text" />
           <span>日记管理</span>
           </MenuItem>
-          <MenuItem name="6"
+          <MenuItem name="UserManage"
                     to="/admin/user">
           <Icon type="ios-people" />
           <span>会员管理</span>
           </MenuItem>
-          <MenuItem name="7">
+          <MenuItem name="Setting"
+                    to="/admin/setting">
           <Icon type="ios-settings"></Icon>
           <span>设置</span>
           </MenuItem>
@@ -105,6 +106,10 @@ export default {
       this.$router.push({
         path
       });
+    },
+    // 导航选择
+    onMenuSelect (name) {
+      console.log(name);
     }
   }
 };

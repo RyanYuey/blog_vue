@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container"
+       v-title
+       data-title="注册">
     <div class="login">
       <div class="inner">
         <h3 class="login-title">博客注册</h3>
@@ -60,11 +62,10 @@
 
 <script>
 import Services from "@/api/common.js";
-import Config from "@/config/index.js";
 export default {
   data () {
     return {
-      host: Config.baseURL,
+      host: process.env.VUE_APP_URL,
       form: {
         user_name: "", //不要用户名，直接拿邮箱做用户名
         user_nickname: "",
@@ -199,7 +200,7 @@ export default {
   .img {
     width: 40px;
     height: 40px;
-    background: blue;
+    background: #ddd;
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;

@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container"
+       v-title
+       data-title="登录">
     <div class="login">
       <div class="inner">
         <h3 class="login-title">博客登录</h3>
@@ -29,7 +31,10 @@
           </FormItem>
         </Form>
         <div style="float:right;">
-          <Button type="text" size="small" icon="md-arrow-round-forward" to="/register">没有账号，去注册</Button>
+          <Button type="text"
+                  size="small"
+                  icon="md-arrow-round-forward"
+                  to="/register">没有账号，去注册</Button>
         </div>
       </div>
     </div>

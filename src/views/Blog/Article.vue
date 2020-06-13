@@ -1,6 +1,8 @@
 <template>
   <div class="article"
-       id="article">
+       id="article"
+       v-title
+       data-title="博文">
     <main>
       <div class="spin-wrap"
            v-if="spinShow">
@@ -52,7 +54,7 @@
     <aside>
       <!-- 分类 搜索 -->
       <section id="filter"
-               class="aside-section filter wow fadeIn">
+               class="aside-section filter">
         <div class="search-wrap">
           <Input search
                  v-model="searchText"
@@ -72,7 +74,7 @@
       </section>
 
       <!-- 热门文章 -->
-      <section class="aside-section hot wow fadeIn"
+      <section class="aside-section hot"
                data-wow-duration="1s">
         <div class="hot-title">热门文章</div>
         <ul class="hot-list">
@@ -121,14 +123,13 @@
 </template>
 
 <script>
-const _Config = require("@/config/index.js");
 import { WOW } from "wowjs";
 import Services from "@/api/common.js";
 let timer;
 export default {
   data () {
     return {
-      host: _Config.baseURL, //域名
+      host: process.env.VUE_APP_URL, //域名
       screenWidth: document.body.clientWidth, //窗口宽度
       spinShow: true, //是否显示加载中
       default_img: "../../assets/image/night.jpg",

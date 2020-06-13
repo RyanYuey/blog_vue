@@ -1,5 +1,7 @@
 <template>
-  <div class="home">
+  <div class="home"
+       v-title
+       data-title="首页">
     <section class="swiper-wrap"
              ref="swiper">
       <div class="inner">
@@ -154,7 +156,16 @@
     </transition>
     <transition name="slide">
       <div class="popup"
-           v-show="showNav"></div>
+           v-show="showNav">
+        <div class="nav-list">
+          <div class="nav-item"
+               @click="jumpTo('Blog')">博客</div>
+          <div class="nav-item"
+               @click="jumpTo('Diary')">日记</div>
+          <div class="nav-item"
+               @click="jumpTo('Message')">留言</div>
+        </div>
+      </div>
     </transition>
     <!-- 返回顶部 -->
     <BackTop :height="500"
@@ -165,7 +176,6 @@
 
 <script>
 // @ is an alias to /src
-const _Config = require("@/config/index.js");
 import { WOW } from "wowjs";
 import Services from "@/api/common.js";
 export default {
@@ -173,7 +183,7 @@ export default {
   components: {},
   data () {
     return {
-      host: _Config.baseURL, //域名
+      host: process.env.VUE_APP_URL, //域名
       screenHeight: window.innerHeight,
       showNav: false,
       hotBlogList: [],
@@ -244,7 +254,6 @@ export default {
   position: relative;
   overflow: hidden;
   .wel {
-    // height: 50px;
     position: absolute;
     top: 150px;
     left: 150px;
@@ -260,14 +269,13 @@ export default {
     height: 100vh;
     background: url("../assets/image/sailing.jpg") no-repeat center;
     background-size: cover;
-    animation: myScalOffset 2s forwards;
   }
   .arrow {
     position: absolute;
     bottom: 50px;
     width: 64px;
-    left: 50%;
-    transform: translateX(-25px);
+    left: calc(50% - 32px);
+    // transform: translateX(-32px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -417,7 +425,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("../assets/image/night.jpg");
+  background: url("../assets/image/night.jpg") 100%;
   background-attachment: fixed;
   .my-button {
     width: 150px;
@@ -519,6 +527,50 @@ export default {
   right: 0;
   z-index: 100;
 }
+.nav-list {
+  margin-top: 120px;
+  .nav-item {
+    padding: 15px 0;
+    margin: 0 80px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.4s;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0px;
+      height: 2px;
+      background: rgba(45, 140, 240, 0.7);
+      transition: 0.6s;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0px;
+      height: 2px;
+      background: #2d8cf0;
+      transition: 0.6s;
+    }
+    &:hover {
+      color: #2d8cf0;
+      &::before {
+        width: 100%;
+      }
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
 
 /* 可以设置不同的进入和离开动画 */
 /* 滑出过渡 */
@@ -542,9 +594,26 @@ export default {
   transition: background 0.5s;
 }
 
+@media screen and (max-width: 500px) {
+  .swiper-wrap {
+    .wel {
+      width: 100%;
+      position: absolute;
+      top: 150px;
+      left: 0;
+      text-align: center;
+    }
+  }
+}
+@media screen and (min-width: 500px) {
+  .swiper {
+    animation: myScalOffset 2s forwards;
+  }
+}
+
 @keyframes myScalOffset {
   from {
-    transform: scale(1.2) translateX(60px);
+    transform: scale(1.3) translateX(50px);
   }
   to {
     transform: scale(1) translateX(0);

@@ -48,5 +48,13 @@ export default {
   // 删除日记
   deleteUser (data) {
     return request.post("/api/admin/del_user", data);
+  },
+  // 删除默认头像
+  deleteAvatar (data) {
+    return request.post("/api/admin/del_avatar", data);
+  },
+  // 设置默认头像
+  addAvatar (data) {
+    return request.post("/api/admin/set_avatar", data);
   }
 };

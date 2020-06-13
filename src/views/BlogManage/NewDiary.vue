@@ -43,7 +43,7 @@ export default {
       content: "",
       diary_img: "",
       showLoading: false,
-      uploadUrl: "http://localhost:8090/" + "api/upload" //上传路径
+      uploadUrl: "/api/upload" //上传路径
     };
   },
   methods: {

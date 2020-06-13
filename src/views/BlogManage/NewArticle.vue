@@ -67,7 +67,6 @@
 </template>
 
 <script>
-const _Config = require("@/config/index");
 import Services from "@/api/common.js";
 import adminServices from "@/api/admin.js";
 import { mavonEditor } from "mavon-editor";
@@ -88,8 +87,9 @@ export default {
       labelList: [], //标签列表
       checkedLabel: [], //选中的标签
       img_file: {}, //缓存文章图片
-      uploadUrl: "http://localhost:8090/" + "api/upload", //上传路径
-      thumbnail: "" //图片预览图
+      uploadUrl: "/api/upload", //上传路径
+      thumbnail: "", //图片预览图
+      host: process.env.VUE_APP_URL
     };
   },
   mounted () {
@@ -240,7 +240,7 @@ export default {
       let res = await Services.upLoad(formData);
       for (let key in res) {
         // 替换成真实的url
-        this.$refs.md.$img2Url(key, _Config.baseURL + res[key]);
+        this.$refs.md.$img2Url(key, this.host + res[key]);
       }
     },
     $imgDel (pos) {

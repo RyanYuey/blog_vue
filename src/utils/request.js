@@ -1,10 +1,12 @@
 import axios from "axios";
-// import config from "../config/index"; // 路径配置
 
 // 创建axios 实例
 const service = axios.create({
   // baseURL: config.baseURL, // 如果配置了域名，会替换掉vue.config.js中的target 配置例如/api 则会在域名后拼接
-  timeout: 10000 // 请求超时时间
+  timeout: 10000, // 请求超时时间
+  headers: {
+    "Content-Type": "application/json"
+  }
 });
 
 // request 拦截器

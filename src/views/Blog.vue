@@ -44,7 +44,7 @@
           <div class="user">
             <div v-if="$store.getters.user_name">
               <Poptip trigger="hover">
-                <div>
+                <div class="user-name">
                   <Avatar :src="host + userInfo.user_avatar" />
                   {{ userInfo.user_nickname }}
                 </div>
@@ -73,31 +73,18 @@
         </div>
         <div class="mobile-nav"
              :style="{ 'max-height': showMobileNav ? '400px' : '0px' }">
-          <Menu theme="light"
-                mode="vertical"
-                width="100%"
-                accordion>
-            <MenuItem name="Home"
-                      to="/home">
-            首页
-            </MenuItem>
-            <MenuItem name="Article"
-                      to="/blog/article">
-            博客
-            </MenuItem>
-            <MenuItem name="Diary"
-                      to="/blog/diary">
-            日记
-            </MenuItem>
-            <MenuItem name="Message"
-                      to="/blog/message">
+          <div class="mobile-nav-item"
+               @click="jumpTo('/home')">首页</div>
+          <div class="mobile-nav-item"
+               @click="jumpTo('/blog')">博客</div>
+          <div class="mobile-nav-item"
+               @click="jumpTo('/blog/diary')">日记</div>
+          <div class="mobile-nav-item"
+               @click="jumpTo('/blog/message')">
             留言
-            </MenuItem>
-            <MenuItem name="About"
-                      to="/blog/about">
-            关于
-            </MenuItem>
-          </Menu>
+          </div>
+          <div class="mobile-nav-item"
+               @click="jumpTo('/blog/about')">关于</div>
         </div>
       </Header>
       <Content :style="{
@@ -122,25 +109,24 @@
 </template>
 
 <script>
-import Config from "@/config/index.js";
 import Services from "@/api/common.js";
 export default {
   data () {
     return {
       showMobileNav: false,
       userInfo: {},
-      host: Config.baseURL
+      host: process.env.VUE_APP_URL
     };
   },
   mounted () {
     this.userInfo = JSON.parse(localStorage.getItem("user_info"));
-    console.log(this.userInfo);
   },
   methods: {
     jumpTo (path) {
       this.$router.push({
         path
       });
+      this.showMobileNav = false;
     },
     // 导航选择
     onMenuSelect (name) {
@@ -190,7 +176,7 @@ export default {
   padding: 0;
 }
 .ivu-menu-horizontal {
-  height: auto;
+  // height: auto;
   line-height: 64px;
 }
 .ivu-menu-horizontal.ivu-menu-light:after {
@@ -216,6 +202,13 @@ export default {
   background: #212220;
 }
 
+.user-name {
+  width: 8em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 // 开关，控制导航
 .trigger {
   display: none;
@@ -227,13 +220,21 @@ export default {
 // 移动端导航
 .mobile-nav {
   position: fixed;
-  top: 64px;
+  top: 63px;
   left: 0;
   right: 0;
-  background: pink;
+  background: #fff;
   max-height: 0;
   transition: 0.5s;
   overflow: hidden;
+  &-item {
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    &:first-child {
+      border-top: 1px solid #eee;
+    }
+  }
 }
 .mobile-nav-in {
   animation: fadeIn 1s;

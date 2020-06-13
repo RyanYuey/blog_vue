@@ -1,9 +1,11 @@
 <template>
-  <div class="message">
+  <div class="message"
+       v-title
+       data-title="留言">
     <!-- 评论 -->
     <div class="comment">
       <Divider type="horizontal"
-               orientation="center">如果没有与外界的沟通交流，所谓的创造与科研只能是闭门造车</Divider>
+               orientation="center">你们的意见就是对我最大的鼓励</Divider>
       <comment-input :show="true"
                      @confirm="newComment"></comment-input>
     </div>
@@ -21,7 +23,6 @@
   </div>
 </template>
 <script>
-const _Config = require("@/config/index.js");
 import Services from "@/api/common.js";
 import comment from "@/components/comment.vue"; //引入评论组件
 import commentInput from "@/components/comment-input.vue"; //评论输入框组件
@@ -32,7 +33,7 @@ export default {
   },
   data () {
     return {
-      host: _Config.baseURL,
+      host: process.env.VUE_APP_URL,
       commentsData: [], //评论数据
       userInfo: {
         user_id: 0
@@ -59,9 +60,9 @@ export default {
             item.create_time,
             "yyyy-MM-dd hh:mm"
           );
-          item.from_avatar = _Config.baseURL + item.from_avatar;
+          item.from_avatar = this.host + item.from_avatar;
           if (item.to_avatar) {
-            item.to_avatar = _Config.baseURL + item.to_avatar;
+            item.to_avatar = this.host + item.to_avatar;
           }
         });
       }

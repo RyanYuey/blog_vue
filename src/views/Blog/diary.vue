@@ -1,10 +1,12 @@
 <template>
-  <div class="diary">
+  <div class="diary"
+       v-title
+       data-title="日记">
     <div class="spin-wrap"
-           v-if="spinShow">
-        <Spin size="large"
-              fix
-              v-if="spinShow"></Spin>
+         v-if="spinShow">
+      <Spin size="large"
+            fix
+            v-if="spinShow"></Spin>
     </div>
     <div class="year asyncWow bounceInUp"
          v-for="name in dataArr"
@@ -39,7 +41,6 @@
 
 <script>
 import { WOW } from "wowjs";
-const _Config = require("@/config/index.js");
 import Services from "@/api/common.js";
 export default {
   data () {
@@ -47,7 +48,7 @@ export default {
       hideObj: {}, //控制数据展开收起
       dataObj: {},
       dataArr: [], //保存对象的key，这样可以排序
-      host: _Config.baseURL,
+      host: process.env.VUE_APP_URL,
       spinShow: true
     };
   },
@@ -164,7 +165,7 @@ export default {
   }
 }
 
-.spin-wrap{
+.spin-wrap {
   position: relative;
   height: 400px;
 }

@@ -1,5 +1,7 @@
 <template>
-  <div class="articleDetail">
+  <div class="articleDetail"
+       v-title
+       data-title="博文详情">
     <div class="article-header">
       <div class="info">
         <div class="avatar">
@@ -26,7 +28,7 @@
                       :subfield="false"
                       :boxShadow="false"
                       defaultOpen="preview"
-                      codeStyle="atelier-estuary-dark"
+                      codeStyle="monokai-sublime"
                       style="z-index:0;" />
       </div>
       <!-- 标签 -->
@@ -90,7 +92,6 @@
 </template>
 
 <script>
-const _Config = require("@/config/index.js");
 import Services from "@/api/common.js";
 import comment from "@/components/comment.vue"; //引入评论组件
 import commentInput from "@/components/comment-input.vue"; //评论输入框组件
@@ -106,7 +107,7 @@ export default {
   data () {
     return {
       spinShow: true,
-      host: _Config.baseURL,
+      host: process.env.VUE_APP_URL,
       article: {}, //文章的所有信息
       extend_data: {
         before: { id: -1, title: "哇，我找不到了" },
@@ -192,9 +193,9 @@ export default {
             item.create_time,
             "yyyy-MM-dd hh:mm"
           );
-          item.from_avatar = _Config.baseURL + item.from_avatar;
+          item.from_avatar = this.host + item.from_avatar;
           if (item.to_avatar) {
-            item.to_avatar = _Config.baseURL + item.to_avatar;
+            item.to_avatar = this.host + item.to_avatar;
           }
         });
       }
